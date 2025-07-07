@@ -11,7 +11,7 @@ int main() {
         cout << "\n=== Select an adventure ===\n";
         cout << "1. Nerysia (Water World)\n";
         cout << "2. Infernum (Fire World)\n";
-        cout << "3. Thornia (Apocalyptic World)\n";
+        cout << "3. Thornia (Forgotten World)\n";
         cout << "4. Show progress\n";
         cout << "0. Exit\n";
         cout << "Option: ";
