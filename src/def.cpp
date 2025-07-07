@@ -454,10 +454,7 @@ void minigameBrazas() {
     cout << "Mini-game finished.\n";
 }
 
-//game open chest
-#include <iostream>
-#include <string>
-using namespace std;
+
 
 void minigameopenChest() {
     const int code[3] = {3, 1, 5}; // secret combination
