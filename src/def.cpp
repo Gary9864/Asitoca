@@ -525,6 +525,40 @@ void minigameopenChest() {
         cout << "----------------------------------------\n";
     }
 }
+//game choose door
+void minigamechooseDoor() {
+    int choice;
+    const int correctDoor = 2; // this is the correct door
+    bool passed = false;
+
+    cout << "================ DOORS OF DESTINY ================\n";
+    cout << "You are facing 3 mysterious doors...\n";
+    cout << "Only one of them will let you continue.\n";
+    cout << "Choose wisely (door 1, 2, or 3).\n\n";
+
+    while (!passed) {
+        cout << "Choose a door (1, 2, or 3): ";
+        cin >> choice;
+
+        // Input validation
+        while (choice < 1 || choice > 3) {
+            cout << "That's not a valid door. Try with 1, 2, or 3: ";
+            cin >> choice;
+        }
+
+        // Evaluate choice
+        if (choice == correctDoor) {
+            cout << "\nCorrect! The door creaks open slowly...\n";
+            cout << "You move on to the next level of the mystery.\n";
+            passed = true;
+        } else {
+            cout << "\nThat door is sealed. A dark whisper stops you.\n";
+            cout << "Try another door...\n";
+        }
+
+        cout << "-----------------------------------------------------\n";
+    }
+}
 
 
 // Mini-games placeholders
