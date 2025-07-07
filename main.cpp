@@ -45,7 +45,7 @@ int main() {
                 tryPlayAdventure(thornia, 2, getConfigThornia());
                 break;
             case 4:
-                showRewards();
+                readProgress();
                 break;
             case 0:
                 cout << "See you soon, " << playerName << "!!!!!\n";

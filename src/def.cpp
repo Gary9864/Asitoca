@@ -177,8 +177,8 @@ void showRewards() {
     cout << endl;
 }
 //save progress
-void saveProgress() {
-    ofstream file("src./progress.txt");
+void saveProgress(string name, string adventures, string rewards){
+    ofstream file("src/progress.txt");
     if (file.is_open()) {
         file << playerName << endl;
         
@@ -208,7 +208,7 @@ void saveProgress() {
         cout << "Could not open file to save.\n";
     }
 }//show progress
-void showProgress() {
+void readProgress() {
     ifstream file("src/progress.txt");
     if (file.is_open()) {
         string line;
@@ -244,62 +244,6 @@ void showProgress() {
     }
 }
 
-// Mini-games placeholders
-
-string minigameDuel() {
-    char runes[5] = {'A', 'S', 'D', 'F', 'J'};
-    int position = 0;
-
-    cout << "\n--- Minigame: Rune Duel ---\n";
-    cout << "Instructions: A letter (A, S, D, F or J) will be shown.\n";
-    cout << "Press that key. 4 hits = victory, 2 misses = restart.\n";
-
-    while (true) { // Repeat until the player wins
-
-        int hits = 0;
-        int misses = 0;
-        position = 0;
-
-        while (hits < 4 && misses < 2) {
-            char rune = runes[position];
-            position = (position + 1) % 5;
-
-            cout << "\nEnemy rune: " << rune << "\n";
-            char key;
-             // // VALIDATION: repeat until a non-number is entered
-
-            while (true) {
-                cout << "Press the correct key: ";
-                key = _getch();
-                cout << key << endl;
-
-                if (key >= '0' && key <= '9') {
-                    cout << "You cannot use numbers. Try again.\n";
-                } else {
-                    break;  // Exit the while loop if the input is not a number
-
-                }
-            }
-
-            if (key == rune || key == rune + 32) {
-                cout << "Correct!\n";
-                hits++;
-            } else {
-                cout << "You missed!\n";
-                misses++;
-            }
-
-            cout << "Hits: " << hits << " | Misses: " << misses << "\n";
-        }
-
-        if (hits == 4) {
-            cout << "\n You have won the rune duel!\n";
-            return "";
-        } else {
-            cout << "\n You missed... the duel starts again.\n";
-        }
-    }
-}
 //Minigame Nerysia for level 2
 
 void minigameFishing() {
@@ -395,6 +339,349 @@ void minigameLostObjects() {
     }
 
     cout << "Minigame finished.\n";
+}
+//game 3  magma
+void magmaMiniGame() {
+    string options[3] = {"Rock", "Paper", "Magma"};
+    int guardianMoves[3] = {2, 0, 1}; // Magma, Rock, Paper
+    int player, guardian;
+    int playerPoints = 0, guardianPoints = 0;
+    int round = 0;
+
+    cout << "You must defeat the stone guardian.\n";
+
+    while (playerPoints < 2 && guardianPoints < 2 && round < 3) {
+        cout << "\n0 = Rock | 1 = Paper | 2 = Magma\nYour choice: ";
+        cin >> player;
+
+        if (player >= 0 && player <= 2) {
+            guardian = guardianMoves[round];
+            cout << "The guardian chose: " << options[guardian] << endl;
+
+            if (player == guardian) {
+                cout << "It's a tie.\n";
+            }
+            else if (
+                (player == 0 && guardian == 2) || // Rock beats Magma
+                (player == 2 && guardian == 1) || // Magma beats Paper
+                (player == 1 && guardian == 0)    // Paper beats Rock
+            ) {
+                cout << "You win this round.\n";
+                playerPoints++;
+            } else {
+                cout << "You lose this round.\n";
+                guardianPoints++;
+            }
+
+            round++; // only advances if input was valid
+        }
+    }
+
+    cout << (playerPoints > guardianPoints ? "\nYou won.\n" : "\nYou lost.\n");
+}
+//game 5 brazas
+void brazasMiniGame() {
+    int secret = 7;
+    int guess;
+
+    cout << "\n--- Mini-Game: Guess the Number of Brazas ---\n";
+    cout << "Guess a number from 1 to 10. You have 3 attempts.\n";
+
+    cout << "Attempt 1: ";
+    cin >> guess;
+
+    if (guess == secret) {
+        cout << "Correct, you guessed it on the first try.\n";
+    } 
+    else {
+        cout << "That's not the number.\n";
+        cout << "Attempt 2: ";
+        cin >> guess;
+
+        if (guess == secret) {
+            cout << "Correct, you guessed it on the second try.\n";
+        } 
+        else {
+            cout << "That's not the number.\n";
+            cout << "Attempt 3: ";
+            cin >> guess;
+
+            if (guess == secret) {
+                cout << "Correct, you guessed it on the third try.\n";
+            } 
+            else {
+                cout << "You lost, no more chances left.\n";
+                cout << "The correct number was " << secret << ".\n";
+            }
+        }
+    }
+
+    cout << "Mini-game finished.\n";
+}
+//game open chest
+void minigameopenChest() {
+    const int code[3] = {3, 1, 5}; // secret combination
+    int attempt[3];
+    bool opened = false;
+
+    cout << "====== SEALED CHEST CHALLENGE ======\n";
+    cout << "Find the secret 3-digit combination (0-9).\n";
+    cout << "You will receive clues after each attempt.\n";
+    cout << "Good luck, brave player.\n";
+
+    while (!opened) {
+        // Player input
+        cout << "Enter your attempt (3 numbers between 0 and 9): ";
+        cin >> attempt[0] >> attempt[1] >> attempt[2];
+
+        // Input validation
+        while (attempt[0] < 0 || attempt[0] > 9 ||
+               attempt[1] < 0 || attempt[1] > 9 ||
+               attempt[2] < 0 || attempt[2] > 9) {
+            cout << "Error: All numbers must be between 0 and 9.\n";
+            cout << "Try again: ";
+            cin >> attempt[0] >> attempt[1] >> attempt[2];
+        }
+
+        // Attempt evaluation
+        int correct = 0;
+        int misplaced = 0;
+        bool codeUsed[3] = {false, false, false};
+        bool attemptUsed[3] = {false, false, false};
+
+        // Check correct positions
+        for (int i = 0; i < 3; i++) {
+            if (attempt[i] == code[i]) {
+                correct++;
+                codeUsed[i] = true;
+                attemptUsed[i] = true;
+            }
+        }
+
+        // Check correct numbers in wrong positions
+        for (int i = 0; i < 3; i++) {
+            if (!attemptUsed[i]) {
+                for (int j = 0; j < 3; j++) {
+                    if (!codeUsed[j] && attempt[i] == code[j]) {
+                        misplaced++;
+                        codeUsed[j] = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Attempt result
+        if (correct == 3) {
+            cout << "\nPerfect! You guessed the exact combination.\n";
+            cout << "The chest opens and reveals an object at the bottom.\n";
+            opened = true;
+        } else {
+            cout << "\nClues from your attempt:\n";
+            cout << " - Numbers in the correct position: " << correct << "\n";
+            cout << " - Correct numbers but in the wrong position: " << misplaced << "\n";
+            cout << "Keep trying...\n";
+        }
+
+        cout << "----------------------------------------\n";
+    }
+}
+//game choose door
+void minigamechooseDoor() {
+    int choice;
+    const int correctDoor = 2; // this is the correct door
+    bool passed = false;
+
+    cout << "================ DOORS OF DESTINY ================\n";
+    cout << "You are facing 3 mysterious doors...\n";
+    cout << "Only one of them will let you continue.\n";
+    cout << "Choose wisely (door 1, 2, or 3).\n\n";
+
+    while (!passed) {
+        cout << "Choose a door (1, 2, or 3): ";
+        cin >> choice;
+
+        // Input validation
+        while (choice < 1 || choice > 3) {
+            cout << "That's not a valid door. Try with 1, 2, or 3: ";
+            cin >> choice;
+        }
+
+        // Evaluate choice
+        if (choice == correctDoor) {
+            cout << "\nCorrect! The door creaks open slowly...\n";
+            cout << "You move on to the next level of the mystery.\n";
+            passed = true;
+        } else {
+            cout << "\nThat door is sealed. A dark whisper stops you.\n";
+            cout << "Try another door...\n";
+        }
+
+        cout << "-----------------------------------------------------\n";
+    }
+}
+
+// Mini-games placeholders
+string minigameDuel() {
+    char runes[5] = {'A', 'S', 'D', 'F', 'J'};
+    int position = 0;
+
+    cout << "\n--- Minigame: Rune Duel ---\n";
+    cout << "Instructions: A letter (A, S, D, F or J) will be shown.\n";
+    cout << "Press that key. 4 hits = victory, 2 misses = restart.\n";
+
+    while (true) { // Repeat until the player wins
+
+        int hits = 0;
+        int misses = 0;
+        position = 0;
+
+        while (hits < 4 && misses < 2) {
+            char rune = runes[position];
+            position = (position + 1) % 5;
+
+            cout << "\nEnemy rune: " << rune << "\n";
+            char key;
+             // // VALIDATION: repeat until a non-number is entered
+
+            while (true) {
+                cout << "Press the correct key: ";
+                key = _getch();
+                cout << key << endl;
+
+                if (key >= '0' && key <= '9') {
+                    cout << "You cannot use numbers. Try again.\n";
+                } else {
+                    break;  // Exit the while loop if the input is not a number
+
+                }
+            }
+
+            if (key == rune || key == rune + 32) {
+                cout << "Correct!\n";
+                hits++;
+            } else {
+                cout << "You missed!\n";
+                misses++;
+            }
+
+            cout << "Hits: " << hits << " | Misses: " << misses << "\n";
+        }
+
+        if (hits == 4) {
+            cout << "\n You have won the rune duel!\n";
+            return "";
+        } else {
+            cout << "\n You missed... the duel starts again.\n";
+        }
+    }
+}
+// Configurations for minigames for each adventure
+MinigameConfig getConfigNerysia() {
+    return MinigameConfig{
+        {false, true, false, true, false}, // levels with minigame
+        {0, 1, 0, 2, 0}                   // minigame type: 1 = fishing, 2 = lost objetc
+    };
+}
+
+MinigameConfig getConfigInfernum() {
+    return MinigameConfig{
+        {false, false, true, false, true},
+        {0, 0, 3, 0, 4}  // 3 = brazas, 5 = magma
+    };
+}
+
+MinigameConfig getConfigThornia() {
+    return MinigameConfig{
+        {false, true, false, true, true},
+        {0, 5, 0, 6, 7}
+    };
+}
+
+// Play a level of an adventure
+bool playLevel(const Level& level, const MinigameConfig& config, int levelIndex) {
+    cout << "\nSituation: " << level.situation << "\n";
+    for (int i = 0; i < 3; i++) {
+        cout << i + 1 << ". " << level.decisions[i].text << "\n";
+    }
+    
+    string input;
+    int option;
+    do {
+        cout << "Choose an option: ";
+        cin >> input;
+        bool isNumber = true;
+        for (char c : input) {
+            if (c < '0' || c > '9') {
+                isNumber = false;
+                break;
+            }
+        }
+        if (!isNumber) {
+            cout << "Invalid input. You must enter only numbers.\n";
+            continue;
+        }
+        option = stoi(input);
+
+        if (option < 1 || option > 3) {
+            cout << "Invalid option. Try again with 1, 2, or 3.\n";
+        }
+    } while (option < 1 || option > 3);
+
+    cout << "\n" << level.decisions[option - 1].consequence << "\n";
+
+    if ((option - 1) == level.winningOption) {
+        // First play minigame if it exists
+        if (config.activate[levelIndex]) {
+            switch (config.type[levelIndex]) {
+                case 1: minigameFishing(); break;
+                case 2: minigameLostObjects(); break;
+                case 3: 
+                case 4: 
+                case 5: minigameopenChest();break;
+                case 6: minigamechooseDoor();break;
+                case 7: minigameDuel(); break;
+
+                default: break;
+            }
+        }
+        
+        // Now show and add reward
+        cout << "You won the reward: " << level.reward << "!\n";
+        addReward(level.reward);
+
+        return true;  // Passed the level
+    } else {
+        cout << "Incorrect option. You must try again!\n";
+        return false; // Repeat level
+    }
+}
+
+// Function to play an adventure
+void playAdventure(const Adventure& adventure, const MinigameConfig& config) {
+    cout << "\n--- Welcome to " << adventure.name << " ---\n";
+    for (int i = 0; i < 5; i++) { // Loop through the array
+        //cout << "\n--- Level " << i + 1 << " ---";
+        bool levelPassed = false;
+        do {
+            levelPassed = playLevel(adventure.levels[i], config, i);
+        } while (!levelPassed); // Repeat until the player chooses correctly
+    }
+    cout << "\nYou have completed the adventure!\n";
+}
+
+
+void tryPlayAdventure(const Adventure& adventure, int adventureIndex, const MinigameConfig& config) {
+    if (adventureIndex < 0 || adventureIndex >= 3) {
+        cout << "Invalid adventure index.\n";
+        return;
+    }
+    if (adventuresPlayed[adventureIndex]) {
+        cout << "\nYou already played the adventure \"" << adventure.name << "\" before.\n";
+    } else {
+        playAdventure(adventure, config);
+        adventuresPlayed[adventureIndex] = true;
+    }
 }
 
 // Introduction function

@@ -27,7 +27,7 @@ struct Adventure {
 // Configuration for minigames: enable and type per level (5 levels)
 struct MinigameConfig {
     bool activate[5];  // true if there is a minigame at that level
-    int type[9];       // minigame type: 1=Memory, 2=Treasure, 3=Simon, 4=Count etc
+    int type[7];       // minigame 1: fishing 2:lostobject 3:hazel 4:hazel 5:duel 6:door 7: chest
 };
 
 // Global variables
@@ -60,15 +60,13 @@ MinigameConfig getConfigInfernum();
 MinigameConfig getConfigThornia();
 
 // Minigame declarations
-void minigameMemory();
-void minigameTreasure();
-void minigameSimon();
-void minigameCount();
-string minigameDuel();
 void minigameFishing();
 void minigameLostObjects();
-void openChest();
-void chooseDoor();
+void brazasMiniGame();
+void magmaMiniGame();
+string minigameDuel();
+void minigameopenChest();
+void minigamechooseDoor();
 
 // Adventure declarations
 extern Adventure nerysia;
