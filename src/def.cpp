@@ -131,7 +131,7 @@ Adventure thornia = {// declare the adventure to which we are going to add data
           },
           "Worn Axe", 2 },
         { "Descending, you find a room with 3 hooded statues with different symbols.",
-          { {"Touch the first statue with a square symbol.", "You activate a trap and didn’t escape in time."},
+          { {"Touch the first statue with a square symbol.", "You activate a trap and didnt escape in time."},
             {"Touch the second statue with a circular symbol.", "A fog appears and you faint."},
             {"Touch the third statue with a triangular symbol.", "The statue moves, you take its hood and a path with 3 doors opens behind it."}
           },
