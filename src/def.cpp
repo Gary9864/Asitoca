@@ -177,7 +177,7 @@ void showRewards() {
     cout << endl;
 }
 //save progress
-void saveProgress(string name, string adventures, string rewards){
+void saveProgress(){
     ofstream file("src/progress.txt");
     if (file.is_open()) {
         file << playerName << endl;
@@ -690,6 +690,7 @@ void tryPlayAdventure(const Adventure& adventure, int adventureIndex, const Mini
     } else {
         playAdventure(adventure, config);
         adventuresPlayed[adventureIndex] = true;
+         saveProgress();
     }
 }
 

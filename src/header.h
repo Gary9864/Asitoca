@@ -51,7 +51,7 @@ void tryPlayAdventure(const Adventure& adventure, int adventureIndex, const Mini
 //function for game introduction
 void gameIntroduction();
 //function to save progress using files
-void saveProgress(string name, string adventures, string rewards);
+void saveProgress();
 //read progress and call it
 void readProgress();
 //functions to configure the minigames
