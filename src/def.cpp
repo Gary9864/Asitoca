@@ -344,7 +344,7 @@ void minigameLostObjects() {
 void minigameMagma() {
     string options[3] = {"Rock", "Paper", "Magma"};
     int guardianMoves[3] = {2, 0, 1}; // Magma, Rock, Paper
-    string playerInput;
+    string input;
     int player = -1, guardian;
     int playerPoints = 0, guardianPoints = 0;
     int round = 0;
@@ -352,20 +352,42 @@ void minigameMagma() {
     cout << "You must defeat the stone guardian.\n";
 
     while (playerPoints < 2 && guardianPoints < 2 && round < 3) {
-        cout << "\nChoose: Rock | Paper | Magma\nYour choice: ";
-        cin >> playerInput;
+        do {
+            cout << "\n0 = Rock | 1 = Paper | 2 = Magma\nYour choice: ";
+            cin >> input;
 
-        // Validar input manual 
-        if (playerInput == "Rock" || playerInput == "rock" || playerInput == "ROCK") {
-            player = 0;
-        } else if (playerInput == "Paper" || playerInput == "paper" || playerInput == "PAPER") {
-            player = 1;
-        } else if (playerInput == "Magma" || playerInput == "magma" || playerInput == "MAGMA") {
-            player = 2;
-        } else {
-            cout << "Invalid input. You must type exactly: Rock, Paper, or Magma.\n";
-            continue;
-        }
+            // Check if input is only digits and only one character
+            bool isValid = true;
+
+            // Validate that input length is 1
+            if (input.length() != 1) {
+                isValid = false;
+            } 
+            // Validate that it is a digit
+            else if (input[0] < '0' || input[0] > '9') {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                cout << "Invalid input. You must enter a single number (0, 1, or 2).\n";
+                continue;
+            }
+
+            // Convert to int
+            player = input[0] - '0';
+
+            if (player < 0 || player > 2) {
+                cout << "Number out of range. Choose 0, 1, or 2.\n";
+                isValid = false;
+            }
+
+            if (!isValid) {
+                continue;
+            } else {
+                break;
+            }
+
+        } while (true);
 
         guardian = guardianMoves[round];
         cout << "The guardian chose: " << options[guardian] << endl;
