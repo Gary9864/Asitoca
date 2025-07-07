@@ -454,10 +454,7 @@ void minigameBrazas() {
     cout << "Mini-game finished.\n";
 }
 
-//game open chest
-#include <iostream>
-#include <string>
-using namespace std;
+
 
 void minigameopenChest() {
     const int code[3] = {3, 1, 5}; // secret combination
@@ -526,6 +523,41 @@ void minigameopenChest() {
         }
 
         cout << "----------------------------------------\n";
+    }
+}
+//game choose door
+void minigamechooseDoor() {
+    string input;
+    int choice;
+    const int correctDoor = 2;
+    bool passed = false;
+
+    cout << "================ DOORS OF DESTINY ================\n";
+    cout << "You are facing 3 mysterious doors...\n";
+    cout << "Only one of them will let you continue.\n";
+    cout << "Choose wisely (door 1, 2, or 3).\n\n";
+
+    while (!passed) {
+        cout << "Choose a door (1, 2, or 3): ";
+        cin >> input;
+
+        // Validar que solo sea un número entre "1" y "3"
+        if (input == "1" || input == "2" || input == "3") {
+            choice = stoi(input); // Convertimos a entero
+
+            if (choice == correctDoor) {
+                cout << "\nCorrect! The door creaks open slowly...\n";
+                cout << "You move on to the next level of the mystery.\n";
+                passed = true;
+            } else {
+                cout << "\nThat door is sealed. A dark whisper stops you.\n";
+                cout << "Try another door...\n";
+            }
+        } else {
+            cout << "That's not a valid door. Please type 1, 2, or 3.\n";
+        }
+
+        cout << "-----------------------------------------------------\n";
     }
 }
 
