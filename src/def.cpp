@@ -155,27 +155,27 @@ Adventure umbra = {
     {
         { "You've entered the forgotten temple of shadows. A door requires a key shaped like a pearl. What do you use?",
           {
-              {"Use the Luminous Pearl", "The door unlocks with a deep hum."},
               {"Use the Ancient Coral Fragment", "The door rejects it and shocks you."},
+              {"Use the Luminous Pearl", "The door unlocks with a deep hum."},
               {"Force the door open", "It releases shadow gas. You pass out."}
           },
-          "Shadow Cloak", 0 },
+          "Shadow Cloak", 1 },
 
         { "A massive crystal with fire swirling inside blocks your path. It reacts to volcanic energy.",
           {
-              {"Use the Lava Sword", "The sword melts part of the crystal and reveals a narrow passage."},
+              {"Ignore it and move around", "The fire reaches you. You get burned."},
               {"Use the Colossus Amulet", "The crystal cracks slightly, but remains solid."},
-              {"Ignore it and move around", "The fire reaches you. You get burned."}
+              {"Use the Lava Sword", "The sword melts part of the crystal and reveals a narrow passage."}
           },
-          "Cracked Ember Crystal", 0 },
+          "Cracked Ember Crystal", 2 },
 
         { "You find a pedestal with a riddle: 'Ink binds truth in darkness.' Only one item can activate it.",
           {
-              {"Ancient Ink", "The pedestal glows. A hidden door opens."},
               {"Heart of Nerysia", "It reacts but nothing happens."},
+              {"Ancient Ink", "The pedestal glows. A hidden door opens."},
               {"Worn Axe", "Nothing changes."}
           },
-          "Truth Medallion", 0 },
+          "Truth Medallion", 1 },
 
         { "You're attacked by a shadow beast immune to normal weapons.",
           {
@@ -187,11 +187,11 @@ Adventure umbra = {
 
         { "At the final chamber, your path is blocked by a memory guardian who asks: 'What connects all your victories?'",
           {
-              {"Use the Current Amulet", "The winds guide your memories and the path opens."},
               {"Show all rewards", "The guardian nods but doesn't move."},
+              {"Use the Current Amulet", "The winds guide your memories and the path opens."},
               {"Use the Unknown Book", "The guardian reads it, but remains still."}
           },
-          "Memory Crystal", 0 }
+          "Memory Crystal", 1 }
     }
 };
 
