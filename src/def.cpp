@@ -344,37 +344,48 @@ void minigameLostObjects() {
 void minigameMagma() {
     string options[3] = {"Rock", "Paper", "Magma"};
     int guardianMoves[3] = {2, 0, 1}; // Magma, Rock, Paper
-    int player, guardian;
+    string playerInput;
+    int player = -1, guardian;
     int playerPoints = 0, guardianPoints = 0;
     int round = 0;
 
     cout << "You must defeat the stone guardian.\n";
 
     while (playerPoints < 2 && guardianPoints < 2 && round < 3) {
-        cout << "\n0 = Rock | 1 = Paper | 2 = Magma\nYour choice: ";
-        cin >> player;
+        cout << "\nChoose: Rock | Paper | Magma\nYour choice: ";
+        cin >> playerInput;
 
-        if (player >= 0 && player <= 2) {
-            guardian = guardianMoves[round];
-            cout << "The guardian chose: " << options[guardian] << endl;
-
-            if (player == guardian) {
-                cout << "It's a tie.\n";
-            }
-            else if (
-                (player == 0 && guardian == 2) || // Rock beats Magma
-                (player == 2 && guardian == 1) || // Magma beats Paper
-                (player == 1 && guardian == 0)    // Paper beats Rock
-            ) {
-                cout << "You win this round.\n";
-                playerPoints++;
-            } else {
-                cout << "You lose this round.\n";
-                guardianPoints++;
-            }
-
-            round++; // only advances if input was valid
+        // Validar input manual 
+        if (playerInput == "Rock" || playerInput == "rock" || playerInput == "ROCK") {
+            player = 0;
+        } else if (playerInput == "Paper" || playerInput == "paper" || playerInput == "PAPER") {
+            player = 1;
+        } else if (playerInput == "Magma" || playerInput == "magma" || playerInput == "MAGMA") {
+            player = 2;
+        } else {
+            cout << "Invalid input. You must type exactly: Rock, Paper, or Magma.\n";
+            continue;
         }
+
+        guardian = guardianMoves[round];
+        cout << "The guardian chose: " << options[guardian] << endl;
+
+        if (player == guardian) {
+            cout << "It's a tie.\n";
+        }
+        else if (
+            (player == 0 && guardian == 2) || // Rock beats Magma
+            (player == 2 && guardian == 1) || // Magma beats Paper
+            (player == 1 && guardian == 0)    // Paper beats Rock
+        ) {
+            cout << "You win this round.\n";
+            playerPoints++;
+        } else {
+            cout << "You lose this round.\n";
+            guardianPoints++;
+        }
+
+        round++; // advances if valid
     }
 
     cout << (playerPoints > guardianPoints ? "\nYou won.\n" : "\nYou lost.\n");
