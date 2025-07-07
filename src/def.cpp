@@ -316,21 +316,25 @@ void minigameFishing() {
 // Minigame Nerysia for level 4
 void minigameLostObjects() {
     char objects[5] = {'F', 'R', 'F', 'L', 'T'}; // 'F' is repeated
-    char answer;
+    string input;
+    bool correct = false;
 
     cout << "\n--- Minigame: Lost Objects ---\n";
     cout << "Look at the objects: ";
     for (int i = 0; i < 5; i++) cout << objects[i] << " ";
     cout << "\nOne of them is repeated. Which one? ";
 
-    bool correct = false;
     while (!correct) {
-        cin >> answer;
+        cin >> input;
 
-        // Validate if it's a letter
+        if (input.length() != 1) {
+            cout << "Only one letter is allowed. Try again: ";
+            continue;
+        }
+
+        char answer = input[0];
+
         if ((answer >= 'A' && answer <= 'Z') || (answer >= 'a' && answer <= 'z')) {
-            // Check if it's the correct one
-            // continuation of minigameLostObjects
             if (answer == 'F' || answer == 'f') {
                 cout << "Correct! 'F' is repeated.\n";
                 correct = true;
@@ -338,7 +342,7 @@ void minigameLostObjects() {
                 cout << "Wrong! Try again: ";
             }
         } else {
-            cout << "Please enter a letter: ";
+            cout << "Please enter a valid letter: ";
         }
     }
 
