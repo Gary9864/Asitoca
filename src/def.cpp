@@ -391,42 +391,54 @@ void minigameMagma() {
     cout << (playerPoints > guardianPoints ? "\nYou won.\n" : "\nYou lost.\n");
 }
 //game 5 brazas
-void minigameBrazas() {
+void minigameBrazas() { 
     int secret = 7;
     int guess;
+    string input;
+    bool validInput = false;
 
     cout << "\n--- Mini-Game: Guess the Number of Brazas ---\n";
     cout << "Guess a number from 1 to 10. You have 3 attempts.\n";
 
-    cout << "Attempt 1: ";
-    cin >> guess;
+    for (int attempt = 1; attempt <= 3; attempt++) {
+        do {
+            cout << "Attempt " << attempt << ": ";
+            cin >> input;
 
-    if (guess == secret) {
-        cout << "Correct, you guessed it on the first try.\n";
-    } 
-    else {
-        cout << "That's not the number.\n";
-        cout << "Attempt 2: ";
-        cin >> guess;
+            // Check if all characters are digits
+            validInput = true;
+            for (char c : input) {
+                if (c < '0' || c > '9') {
+                    validInput = false;
+                    break;
+                }
+            }
+
+            if (!validInput) {
+                cout << "Invalid input. Please enter only numbers.\n";
+                continue;
+            }
+
+            // Convert to integer
+            guess = stoi(input);
+
+            if (guess < 1 || guess > 10) {
+                cout << "Number must be between 1 and 10.\n";
+                validInput = false; // ask again
+            }
+        } while (!validInput);
 
         if (guess == secret) {
-            cout << "Correct, you guessed it on the second try.\n";
-        } 
-        else {
+            cout << "Correct, you guessed it on attempt " << attempt << ".\n";
+            cout << "Mini-game finished.\n";
+            return;
+        } else {
             cout << "That's not the number.\n";
-            cout << "Attempt 3: ";
-            cin >> guess;
-
-            if (guess == secret) {
-                cout << "Correct, you guessed it on the third try.\n";
-            } 
-            else {
-                cout << "You lost, no more chances left.\n";
-                cout << "The correct number was " << secret << ".\n";
-            }
         }
     }
 
+    cout << "You lost, no more chances left.\n";
+    cout << "The correct number was " << secret << ".\n";
     cout << "Mini-game finished.\n";
 }
 //game open chest
