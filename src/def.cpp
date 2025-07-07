@@ -527,8 +527,9 @@ void minigameopenChest() {
 }
 //game choose door
 void minigamechooseDoor() {
+    string input;
     int choice;
-    const int correctDoor = 2; // this is the correct door
+    const int correctDoor = 2;
     bool passed = false;
 
     cout << "================ DOORS OF DESTINY ================\n";
@@ -538,22 +539,22 @@ void minigamechooseDoor() {
 
     while (!passed) {
         cout << "Choose a door (1, 2, or 3): ";
-        cin >> choice;
+        cin >> input;
 
-        // Input validation
-        while (choice < 1 || choice > 3) {
-            cout << "That's not a valid door. Try with 1, 2, or 3: ";
-            cin >> choice;
-        }
+        // Validar que solo sea un número entre "1" y "3"
+        if (input == "1" || input == "2" || input == "3") {
+            choice = stoi(input); // Convertimos a entero
 
-        // Evaluate choice
-        if (choice == correctDoor) {
-            cout << "\nCorrect! The door creaks open slowly...\n";
-            cout << "You move on to the next level of the mystery.\n";
-            passed = true;
+            if (choice == correctDoor) {
+                cout << "\nCorrect! The door creaks open slowly...\n";
+                cout << "You move on to the next level of the mystery.\n";
+                passed = true;
+            } else {
+                cout << "\nThat door is sealed. A dark whisper stops you.\n";
+                cout << "Try another door...\n";
+            }
         } else {
-            cout << "\nThat door is sealed. A dark whisper stops you.\n";
-            cout << "Try another door...\n";
+            cout << "That's not a valid door. Please type 1, 2, or 3.\n";
         }
 
         cout << "-----------------------------------------------------\n";
