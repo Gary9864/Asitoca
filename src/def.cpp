@@ -256,52 +256,56 @@ void minigameFishing() {
     cout << "\n--- Minigame: Fishing in Crystal Waters ---\n";
     cout << "Guess at what point (x, y) the fish is (values between 0 and 2):\n";
 
-    // Validate X
     while (true) {
-        cout << "Enter X coordinate: ";
-        cin >> input;
+        // Validar coordenada X
+        while (true) {
+            cout << "Enter X coordinate: ";
+            cin >> input;
 
-        bool isNumber = true;
-        for (char c : input) {
-            if (!isdigit(c)) {
-                isNumber = false;
-                break;
+            bool isNumber = true;
+            for (char c : input) {
+                if (!isdigit(c)) {
+                    isNumber = false;
+                    break;
+                }
             }
-        }
 
-        if (isNumber) {
-            tryX = stoi(input);
-            if (tryX >= 0 && tryX <= 2) break;
-        }
-
-        cout << "Invalid input. Enter a number between 0 and 2.\n";
-    }
-
-    // Validate Y
-    while (true) {
-        cout << "Enter Y coordinate: ";
-        cin >> input;
-
-        bool isNumber = true;
-        for (char c : input) {
-            if (!isdigit(c)) {
-                isNumber = false;
-                break;
+            if (isNumber) {
+                tryX = stoi(input);
+                if (tryX >= 0 && tryX <= 2) break;
             }
+
+            cout << "Invalid input. Enter a number between 0 and 2.\n";
         }
 
-        if (isNumber) {
-            tryY = stoi(input);
-            if (tryY >= 0 && tryY <= 2) break;
+        // Validar coordenada Y
+        while (true) {
+            cout << "Enter Y coordinate: ";
+            cin >> input;
+
+            bool isNumber = true;
+            for (char c : input) {
+                if (!isdigit(c)) {
+                    isNumber = false;
+                    break;
+                }
+            }
+
+            if (isNumber) {
+                tryY = stoi(input);
+                if (tryY >= 0 && tryY <= 2) break;
+            }
+
+            cout << "Invalid input. Enter a number between 0 and 2.\n";
         }
 
-        cout << "Invalid input. Enter a number between 0 and 2.\n";
-    }
-
-    if (tryX == x && tryY == y) {
-        cout << "You caught the golden fish!\n";
-    } else {
-        cout << "Nothing here... The fish was at (" << x << ", " << y << ")\n";
+        // Verificar si acertó
+        if (tryX == x && tryY == y) {
+            cout << "You caught the golden fish at (" << x << ", " << y << ")!\n";
+            break;
+        } else {
+            cout << "Nothing here... Try again!\n";
+        }
     }
 
     cout << "Minigame finished.\n";
@@ -351,37 +355,22 @@ void minigameMagma() {
 
     cout << "You must defeat the stone guardian.\n";
 
-    while (playerPoints < 2 && guardianPoints < 2 && round < 3) {
+    while (playerPoints < 2) {
         do {
             cout << "\n0 = Rock | 1 = Paper | 2 = Magma\nYour choice: ";
             cin >> input;
 
-            // Check if input is only digits and only one character
             bool isValid = true;
 
-            // Validate that input length is 1
-            if (input.length() != 1) {
+            if (input.length() != 1 || input[0] < '0' || input[0] > '9') {
                 isValid = false;
-            } 
-            // Validate that it is a digit
-            else if (input[0] < '0' || input[0] > '9') {
-                isValid = false;
+            } else {
+                player = input[0] - '0';
+                if (player < 0 || player > 2) isValid = false;
             }
 
             if (!isValid) {
-                cout << "Invalid input. You must enter a single number (0, 1, or 2).\n";
-                continue;
-            }
-
-            // Convert to int
-            player = input[0] - '0';
-
-            if (player < 0 || player > 2) {
-                cout << "Number out of range. Choose 0, 1, or 2.\n";
-                isValid = false;
-            }
-
-            if (!isValid) {
+                cout << "Invalid input. Enter 0, 1, or 2.\n";
                 continue;
             } else {
                 break;
@@ -389,7 +378,7 @@ void minigameMagma() {
 
         } while (true);
 
-        guardian = guardianMoves[round];
+        guardian = guardianMoves[round % 3]; // cicla entre 0, 1, 2
         cout << "The guardian chose: " << options[guardian] << endl;
 
         if (player == guardian) {
@@ -407,22 +396,24 @@ void minigameMagma() {
             guardianPoints++;
         }
 
-        round++; // advances if valid
+        round++;
     }
 
-    cout << (playerPoints > guardianPoints ? "\nYou won.\n" : "\nYou lost.\n");
+    cout << "\nYou won.\n";
 }
+
 //game 5 brazas
 void minigameBrazas() { 
     int secret = 7;
     int guess;
     string input;
     bool validInput = false;
+    int attempt = 1;
 
     cout << "\n--- Mini-Game: Guess the Number of Brazas ---\n";
-    cout << "Guess a number from 1 to 10. You have 3 attempts.\n";
+    cout << "Guess a number from 1 to 10. Keep trying until you guess correctly.\n";
 
-    for (int attempt = 1; attempt <= 3; attempt++) {
+    while (true) {
         do {
             cout << "Attempt " << attempt << ": ";
             cin >> input;
@@ -451,19 +442,23 @@ void minigameBrazas() {
         } while (!validInput);
 
         if (guess == secret) {
-            cout << "Correct, you guessed it on attempt " << attempt << ".\n";
-            cout << "Mini-game finished.\n";
-            return;
+            cout << "Correct! You guessed it on attempt " << attempt << ".\n";
+            break;
         } else {
-            cout << "That's not the number.\n";
+            cout << "That's not the number. Try again.\n";
         }
+
+        attempt++;
     }
 
-    cout << "You lost, no more chances left.\n";
-    cout << "The correct number was " << secret << ".\n";
     cout << "Mini-game finished.\n";
 }
+
 //game open chest
+#include <iostream>
+#include <string>
+using namespace std;
+
 void minigameopenChest() {
     const int code[3] = {3, 1, 5}; // secret combination
     int attempt[3];
@@ -475,26 +470,30 @@ void minigameopenChest() {
     cout << "Good luck, brave player.\n";
 
     while (!opened) {
-        // Player input
-        cout << "Enter your attempt (3 numbers between 0 and 9): ";
-        cin >> attempt[0] >> attempt[1] >> attempt[2];
+        // Entrada segura
+        for (int i = 0; i < 3; i++) {
+            string input;
+            bool valid = false;
+            while (!valid) {
+                cout << "Enter digit #" << (i + 1) << " (0-9): ";
+                cin >> input;
 
-        // Input validation
-        while (attempt[0] < 0 || attempt[0] > 9 ||
-               attempt[1] < 0 || attempt[1] > 9 ||
-               attempt[2] < 0 || attempt[2] > 9) {
-            cout << "Error: All numbers must be between 0 and 9.\n";
-            cout << "Try again: ";
-            cin >> attempt[0] >> attempt[1] >> attempt[2];
+                // Validar que el input sea un solo carácter y que sea dígito
+                if (input.length() == 1 && isdigit(input[0])) {
+                    attempt[i] = input[0] - '0';
+                    valid = true;
+                } else {
+                    cout << "Invalid input. Please enter a single digit from 0 to 9.\n";
+                }
+            }
         }
 
-        // Attempt evaluation
+        // Evaluación del intento
         int correct = 0;
         int misplaced = 0;
         bool codeUsed[3] = {false, false, false};
         bool attemptUsed[3] = {false, false, false};
 
-        // Check correct positions
         for (int i = 0; i < 3; i++) {
             if (attempt[i] == code[i]) {
                 correct++;
@@ -503,7 +502,6 @@ void minigameopenChest() {
             }
         }
 
-        // Check correct numbers in wrong positions
         for (int i = 0; i < 3; i++) {
             if (!attemptUsed[i]) {
                 for (int j = 0; j < 3; j++) {
@@ -516,7 +514,6 @@ void minigameopenChest() {
             }
         }
 
-        // Attempt result
         if (correct == 3) {
             cout << "\nPerfect! You guessed the exact combination.\n";
             cout << "The chest opens and reveals an object at the bottom.\n";
@@ -531,40 +528,7 @@ void minigameopenChest() {
         cout << "----------------------------------------\n";
     }
 }
-//game choose door
-void minigamechooseDoor() {
-    int choice;
-    const int correctDoor = 2; // this is the correct door
-    bool passed = false;
 
-    cout << "================ DOORS OF DESTINY ================\n";
-    cout << "You are facing 3 mysterious doors...\n";
-    cout << "Only one of them will let you continue.\n";
-    cout << "Choose wisely (door 1, 2, or 3).\n\n";
-
-    while (!passed) {
-        cout << "Choose a door (1, 2, or 3): ";
-        cin >> choice;
-
-        // Input validation
-        while (choice < 1 || choice > 3) {
-            cout << "That's not a valid door. Try with 1, 2, or 3: ";
-            cin >> choice;
-        }
-
-        // Evaluate choice
-        if (choice == correctDoor) {
-            cout << "\nCorrect! The door creaks open slowly...\n";
-            cout << "You move on to the next level of the mystery.\n";
-            passed = true;
-        } else {
-            cout << "\nThat door is sealed. A dark whisper stops you.\n";
-            cout << "Try another door...\n";
-        }
-
-        cout << "-----------------------------------------------------\n";
-    }
-}
 
 // Mini-games placeholders
 string minigameDuel() {
