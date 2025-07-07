@@ -62,8 +62,8 @@ MinigameConfig getConfigThornia();
 // Minigame declarations
 void minigameFishing();
 void minigameLostObjects();
-void brazasMiniGame();
-void magmaMiniGame();
+void minigameBrazas();
+void minigameMagma();
 string minigameDuel();
 void minigameopenChest();
 void minigamechooseDoor();

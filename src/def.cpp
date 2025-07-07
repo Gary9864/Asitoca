@@ -341,7 +341,7 @@ void minigameLostObjects() {
     cout << "Minigame finished.\n";
 }
 //game 3  magma
-void magmaMiniGame() {
+void minigameMagma() {
     string options[3] = {"Rock", "Paper", "Magma"};
     int guardianMoves[3] = {2, 0, 1}; // Magma, Rock, Paper
     int player, guardian;
@@ -380,7 +380,7 @@ void magmaMiniGame() {
     cout << (playerPoints > guardianPoints ? "\nYou won.\n" : "\nYou lost.\n");
 }
 //game 5 brazas
-void brazasMiniGame() {
+void minigameBrazas() {
     int secret = 7;
     int guess;
 
@@ -636,8 +636,8 @@ bool playLevel(const Level& level, const MinigameConfig& config, int levelIndex)
             switch (config.type[levelIndex]) {
                 case 1: minigameFishing(); break;
                 case 2: minigameLostObjects(); break;
-                case 3: 
-                case 4: 
+                case 3: minigameBrazas(); break;
+                case 4: minigameMagma(); break;
                 case 5: minigameopenChest();break;
                 case 6: minigamechooseDoor();break;
                 case 7: minigameDuel(); break;
