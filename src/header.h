@@ -36,10 +36,13 @@ extern bool adventuresPlayed[3];
 extern string playerRewards[20];
 extern int rewardCount;
 extern string playerName;
+extern bool isUmbraReward[20];
 
 // Function declarations
 //function to add reward
 void addReward(string reward);
+//add umbra reward
+void addUmbraReward(string reward);
 //function to show rewards
 void showRewards();
 //function to play level
@@ -54,6 +57,11 @@ void gameIntroduction();
 void saveProgress();
 //read progress and call it
 void readProgress();
+//show message in umbra
+void showSuccessMessage();
+
+
+
 //functions to configure the minigames
 MinigameConfig getConfigNerysia();
 MinigameConfig getConfigInfernum();

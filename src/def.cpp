@@ -6,6 +6,7 @@
 // Global variables
 bool adventuresPlayed[3] = {false, false, false};
 string playerRewards[20];
+bool isUmbraReward[20];
 int rewardCount = 0;
 string playerName;
 
@@ -204,9 +205,28 @@ void addReward(string reward) {
     if (rewardCount < 20) {// if the quantity is less than 20 rewards
 
         playerRewards[rewardCount++] = reward; // store it in the array adding to the rewards
-
+         isUmbraReward[rewardCount] = false; // Aseguramos que no sea Umbra
+        rewardCount++;
     }
 }
+// umbra function reward
+void addUmbraReward(string reward) {
+    if (rewardCount < 20) {
+        playerRewards[rewardCount] = reward;
+        isUmbraReward[rewardCount] = true; // Marcamos como Umbra
+        rewardCount++;
+    }
+}
+// umbra function show rewards
+void showUmbraRewards() {
+    cout << "\n--- Umbra Rewards ---\n";
+    for (int i = 0; i < rewardCount; i++) {
+        if (isUmbraReward[i]) {
+            cout << "- " << playerRewards[i] << "\n";
+        }
+    }
+}
+
 //display obtained rewards
 void showRewards() {
     cout << "\n--- Obtained Rewards ---\n";
