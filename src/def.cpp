@@ -7,7 +7,6 @@
 bool adventuresPlayed[3] = {false, false, false};
 string playerRewards[20];
 int rewardCount = 0;
-bool isUmbraReward[20];
 string umbraRewards[5];
 int umbraRewardCount = 0;
 string playerName;
