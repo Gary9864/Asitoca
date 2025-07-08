@@ -6,8 +6,10 @@
 // Global variables
 bool adventuresPlayed[3] = {false, false, false};
 string playerRewards[20];
-bool isUmbraReward[20];
 int rewardCount = 0;
+bool isUmbraReward[20];
+string umbraRewards[5];
+int umbraRewardCount = 0;
 string playerName;
 
 // Defined adventures
@@ -205,25 +207,21 @@ void addReward(string reward) {
     if (rewardCount < 20) {// if the quantity is less than 20 rewards
 
         playerRewards[rewardCount++] = reward; // store it in the array adding to the rewards
-         isUmbraReward[rewardCount] = false; // Aseguramos que no sea Umbra
         rewardCount++;
     }
 }
 // umbra function reward
 void addUmbraReward(string reward) {
-    if (rewardCount < 20) {
-        playerRewards[rewardCount] = reward;
-        isUmbraReward[rewardCount] = true; // Marcamos como Umbra
-        rewardCount++;
+    if (umbraRewardCount < 5) {
+        umbraRewards[umbraRewardCount] = reward;
+        umbraRewardCount++;
     }
 }
 // umbra function show rewards
 void showUmbraRewards() {
     cout << "\n--- Umbra Rewards ---\n";
-    for (int i = 0; i < rewardCount; i++) {
-        if (isUmbraReward[i]) {
-            cout << "- " << playerRewards[i] << "\n";
-        }
+    for (int i = 0; i < umbraRewardCount; i++) {
+        cout << "- " << umbraRewards[i] << "\n";
     }
 }
 
@@ -811,9 +809,11 @@ void playAdventure(const Adventure& adventure, const MinigameConfig& config) {
         } while (!levelPassed); // Repeat until the player chooses correctly
     }
     cout << "\nYou have completed the adventure!\n";
+            showRewards();
+
     if (adventure.name == "Umbra (Shadow Realm)") {
         cout << "\n¡Felicidades! Terminaste la aventura especial. ¡Aquí están tus premios obtenidos!\n";
-        showRewards();
+       showUmbraRewards(); // Solo Umbra
         showSuccessMessage(); // show board
 
     }

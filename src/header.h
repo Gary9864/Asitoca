@@ -36,7 +36,9 @@ extern bool adventuresPlayed[3];
 extern string playerRewards[20];
 extern int rewardCount;
 extern string playerName;
-extern bool isUmbraReward[20];
+extern string isUmbraReward[5];
+extern int umbraRewardCount;
+
 
 // Function declarations
 //function to add reward
