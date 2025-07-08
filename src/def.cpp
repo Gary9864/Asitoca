@@ -687,6 +687,46 @@ MinigameConfig getConfigThornia() {
         {0, 5, 0, 6, 7}
     };
 }
+void showSuccessMessage() {
+    const int rows = 7;
+    const int cols = 50;
+    char board[rows][cols];
+
+    // Inicializar matriz con espacios
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            board[i][j] = ' ';
+        }
+    }
+
+    // Diseñar el marco
+    for (int j = 0; j < cols; j++) {
+        board[0][j] = '-';
+        board[rows - 1][j] = '-';
+    }
+    for (int i = 0; i < rows; i++) {
+        board[i][0] = '|';
+        board[i][cols - 1] = '|';
+    }
+
+    // Mensaje en el centro
+    string msg = "¡AVENTURA COMPLETADA CON EXITO!";
+    int startCol = (cols - msg.length()) / 2;
+    for (size_t k = 0; k < msg.length(); k++) {
+        board[3][startCol + k] = msg[k];
+    }
+
+    // Mostrar la matriz
+    cout << "\n";
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << board[i][j];
+        }
+        cout << "\n";
+    }
+    cout << endl;
+}
+
 
 // Play a level of an adventure
 bool playLevel(const Level& level, const MinigameConfig& config, int levelIndex) {
@@ -754,6 +794,8 @@ void playAdventure(const Adventure& adventure, const MinigameConfig& config) {
     if (adventure.name == "Umbra (Shadow Realm)") {
         cout << "\n¡Felicidades! Terminaste la aventura especial. ¡Aquí están tus premios obtenidos!\n";
         showRewards();
+        showSuccessMessage(); // show board
+
     }
 }
 
