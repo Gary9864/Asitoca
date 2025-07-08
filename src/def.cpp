@@ -17,7 +17,7 @@ Adventure nerysia = {
    "Nerysia (Water World)",
     {
         // Level 1 – Coral Reef
-        { "The pufferfish have found their home destroyed. They are furious and are attacking the octopus village.\nWhat weapon do you recommend using?",
+        { "Level 1- The pufferfish have found their home destroyed. They are furious and are attacking the octopus village.\nWhat weapon do you recommend using?",
           { 
               {"Their spines", "The fish get confused and stop attacking for a moment."},
               {"A sword", "The sword is useless underwater, you waste time."},
@@ -26,7 +26,7 @@ Adventure nerysia = {
           "Ancient Ink", 1 },
 
         // Level 2 – Eternal Algae Caves
-        { "As you move through a cave covered in glowing algae, you hear a hypnotic singing. You realize it comes from dark mermaids trying to distract you to steal your life energy.",
+        { "Level 2- As you move through a cave covered in glowing algae, you hear a hypnotic singing. You realize it comes from dark mermaids trying to distract you to steal your life energy.",
           {
               {"You follow the singing, maybe it leads to a clue", "You get hypnotized and lose energy."},
               {"You cover your ears with algae", "You resist the song and move forward successfully."},
@@ -35,7 +35,7 @@ Adventure nerysia = {
           "Luminous Pearl", 2 },
 
         // Level 3 – Abyssal Trench of Oblivion
-        { "You reach an area so deep that light disappears. You find an old fish trapped in a black coral cage begging for help.",
+        { "Level 3- You reach an area so deep that light disappears. You find an old fish trapped in a black coral cage begging for help.",
           {
               {"You free it without asking", "It was a trap, the fish betrays you."},
               {"You ask questions before deciding", "The fish shows wisdom and gives you an ancient fragment."},
@@ -44,7 +44,7 @@ Adventure nerysia = {
           "Ancient Coral Fragment", 2 },
 
         // Level 4 – Fields of Wild Currents
-        { "A violent current pulls you, and you must choose which creature to ally with to help you swim safely.",
+        { "Level 4- A violent current pulls you, and you must choose which creature to ally with to help you swim safely.",
           {
               {"A giant squid", "It helps you, but demands a favor in return."},
               {"A group of sea turtles", "They transport you calmly and safely."},
@@ -53,7 +53,7 @@ Adventure nerysia = {
           "Current Amulet", 2 },
 
         // Level 5 – The Palace of Corruption
-        { "You reach the heart of darkness: a gigantic creature made of oil and shadows is corrupting the water.\nHow do you decide to face it?",
+        { "Level 5- You reach the heart of darkness: a gigantic creature made of oil and shadows is corrupting the water.\nHow do you decide to face it?",
           {
               {"You use a sacred pearl you found on the way", "The creature weakens and retreats."},
               {"You summon all the creatures you helped before", "They fight with you and manage to contain it."},
@@ -109,7 +109,7 @@ Adventure thornia = {// declare the adventure to which we are going to add data
 
 // situation 1 (level 1)
 
-        { "You wake up in ruins covered with fog and a statue emits a sound.", 
+        { "Level 1- You wake up in ruins covered with fog and a statue emits a sound.", 
 // decision and consequence
 
           { {"Touch the statue", "You are paralyzed for a few seconds and lose time."}, 
@@ -124,25 +124,25 @@ Adventure thornia = {// declare the adventure to which we are going to add data
 // repeat the structure for the following levels
 
 
-        { "You leave the cave through the portal and find a tower that whispers your thoughts without stopping.",
+        { "Level 2- You leave the cave through the portal and find a tower that whispers your thoughts without stopping.",
           { {"You remain silent.", "You cannot withstand the voice of your thoughts and lose sanity."},
             {"You climb to the top of the tower.", "You find nothing and return."},
             {"You investigate under the tower near the whispers.", "You find an underground entrance and a chest."}
           },
           "Worn Axe", 2 },
-        { "Descending, you find a room with 3 hooded statues with different symbols.",
+        { "Level 3- Descending, you find a room with 3 hooded statues with different symbols.",
           { {"Touch the first statue with a square symbol.", "You activate a trap and didnt escape in time."},
             {"Touch the second statue with a circular symbol.", "A fog appears and you faint."},
             {"Touch the third statue with a triangular symbol.", "The statue moves, you take its hood and a path with 3 doors opens behind it."}
           },
           "Old Hood.", 2 },
-        { "You follow the path and find a dark room full of weapons with debris and symbols on the walls.",
+        { "Level 4- You follow the path and find a dark room full of weapons with debris and symbols on the walls.",
           { {"Investigate the debris.", "When you approach the debris, you find a book and the runes activate with the hood, revealing a door."},
             {"Return to the previous room.", "You achieve nothing."},
             {"Investigate the weapons.", "You trip and get stabbed humiliatingly by a sword."}
           },
           "Unknown Book.", 0 },
-        { "After crossing the door, you enter a chamber lit by floating crystals. In the center, the Guardian of Oblivion awakens from its slumber. Only one action can weaken it to have a chance to defeat it.",
+        { "Level 5- After crossing the door, you enter a chamber lit by floating crystals. In the center, the Guardian of Oblivion awakens from its slumber. Only one action can weaken it to have a chance to defeat it.",
           { {"Attack directly with the axe.", "The guardian blocks your attack and throws you against the wall, leaving you injured."},
             {"Read aloud the inscription of the unknown book.", "The room shakes. The guardian seems weakened and staggers but remains standing."},
             {"Cover yourself with the old hood.", "The hood burns on contact with the guardian's energy and you are left unprotected."}
