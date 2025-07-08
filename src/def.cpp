@@ -753,6 +753,7 @@ void playAdventure(const Adventure& adventure, const MinigameConfig& config) {
     cout << "\nYou have completed the adventure!\n";
 }
 
+//Play the adventures
 
 void tryPlayAdventure(const Adventure& adventure, int adventureIndex, const MinigameConfig& config) {
     if (adventureIndex < 0 || adventureIndex >= 3) {
@@ -767,6 +768,9 @@ void tryPlayAdventure(const Adventure& adventure, int adventureIndex, const Mini
          saveProgress();
     }
 }
+
+// Level extra (umbra)
+
 void tryPlayUmbra() {
     if (rewardCount < 15) {
         cout << "\nYou must collect all rewards from Nerysia, Infernum, and Thornia to unlock this secret world.\n";
