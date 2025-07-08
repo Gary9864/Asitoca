@@ -153,7 +153,7 @@ Adventure thornia = {// declare the adventure to which we are going to add data
 Adventure umbra = {
     "Umbra (Shadow Realm)",
     {
-        { "You've entered the forgotten temple of shadows. A door requires a key shaped like a pearl. What do you use?",
+        { "Level 1- You've entered the forgotten temple of shadows. A door requires a key shaped like a pearl. What do you use?",
           {
               {"Use the Ancient Coral Fragment", "The door rejects it and shocks you."},
               {"Use the Luminous Pearl", "The door unlocks with a deep hum."},
@@ -161,7 +161,7 @@ Adventure umbra = {
           },
           "Shadow Cloak", 1 },
 
-        { "A massive crystal with fire swirling inside blocks your path. It reacts to volcanic energy.",
+        { "Level 2- A massive crystal with fire swirling inside blocks your path. It reacts to volcanic energy.",
           {
               {"Ignore it and move around", "The fire reaches you. You get burned."},
               {"Use the Colossus Amulet", "The crystal cracks slightly, but remains solid."},
@@ -169,7 +169,7 @@ Adventure umbra = {
           },
           "Cracked Ember Crystal", 2 },
 
-        { "You find a pedestal with a riddle: 'Ink binds truth in darkness.' Only one item can activate it.",
+        { "Level 3- You find a pedestal with a riddle: 'Ink binds truth in darkness.' Only one item can activate it.",
           {
               {"Heart of Nerysia", "It reacts but nothing happens."},
               {"Ancient Ink", "The pedestal glows. A hidden door opens."},
@@ -177,7 +177,7 @@ Adventure umbra = {
           },
           "Truth Medallion", 1 },
 
-        { "You're attacked by a shadow beast immune to normal weapons.",
+        { "Level 4- You're attacked by a shadow beast immune to normal weapons.",
           {
               {"Throw the Totem of Immortality", "It freezes the beast for a moment and you escape."},
               {"Use the Magma Scepter", "It burns through but the beast regenerates."},
@@ -185,7 +185,7 @@ Adventure umbra = {
           },
           "Shadow Beast Fang", 0 },
 
-        { "At the final chamber, your path is blocked by a memory guardian who asks: 'What connects all your victories?'",
+        { "Level 5- At the final chamber, your path is blocked by a memory guardian who asks: 'What connects all your victories?'",
           {
               {"Show all rewards", "The guardian nods but doesn't move."},
               {"Use the Current Amulet", "The winds guide your memories and the path opens."},
@@ -751,6 +751,10 @@ void playAdventure(const Adventure& adventure, const MinigameConfig& config) {
         } while (!levelPassed); // Repeat until the player chooses correctly
     }
     cout << "\nYou have completed the adventure!\n";
+    if (adventure.name == "Umbra (Shadow Realm)") {
+        cout << "\n¡Felicidades! Terminaste la aventura especial. ¡Aquí están tus premios obtenidos!\n";
+        showRewards();
+    }
 }
 
 //Play the adventures
