@@ -204,25 +204,17 @@ Adventure umbra = {
 //add reward if won
 void addReward(string reward) {
     if (rewardCount < 20) {// if the quantity is less than 20 rewards
-
         playerRewards[rewardCount++] = reward; // store it in the array adding to the rewards
-        rewardCount++;
+            
     }
 }
 // umbra function reward
 void addUmbraReward(string reward) {
     if (umbraRewardCount < 5) {
-        umbraRewards[umbraRewardCount] = reward;
-        umbraRewardCount++;
+        umbraRewards[umbraRewardCount++] = reward;
     }
 }
-// umbra function show rewards
-void showUmbraRewards() {
-    cout << "\n--- Umbra Rewards ---\n";
-    for (int i = 0; i < umbraRewardCount; i++) {
-        cout << "- " << umbraRewards[i] << "\n";
-    }
-}
+
 
 //display obtained rewards
 void showRewards() {
@@ -234,6 +226,18 @@ void showRewards() {
         for (int i = 0; i < rewardCount; i++) { // if there are rewards, then iterate through the array and show the rewards won
 
             cout << i + 1 << ". " << playerRewards[i] << "\n";
+        }
+    }
+    cout << endl;
+}
+// umbra function show rewards
+void showUmbraRewards() {
+    cout << "\n--- Umbra Rewards ---\n";
+    if (umbraRewardCount == 0) {
+        cout << "You have no Umbra rewards yet.\n";
+    } else {
+        for (int i = 0; i < umbraRewardCount; i++) {
+            cout << "- " << umbraRewards[i] << "\n";
         }
     }
     cout << endl;
@@ -746,7 +750,7 @@ void showSuccessMessage() {
 
 
 // Play a level of an adventure
-bool playLevel(const Level& level, const MinigameConfig& config, int levelIndex) {
+bool playLevel(const Level& level, const MinigameConfig& config, int levelIndex, const Adventure& adventure) {
     cout << "\nSituation: " << level.situation << "\n";
     for (int i = 0; i < 3; i++) {
         cout << i + 1 << ". " << level.decisions[i].text << "\n";
@@ -788,7 +792,12 @@ while (true) {
         
         // Now show and add reward
         cout << "You won the reward: " << level.reward << "!\n";
-        addReward(level.reward);
+       if (adventure.name == "Umbra (Shadow Realm)") {
+    addUmbraReward(level.reward);
+} else {
+    addReward(level.reward);
+}
+
 
         return true;  // Passed the level
     } else {
@@ -804,7 +813,7 @@ void playAdventure(const Adventure& adventure, const MinigameConfig& config) {
         //cout << "\n--- Level " << i + 1 << " ---";
         bool levelPassed = false;
         do {
-            levelPassed = playLevel(adventure.levels[i], config, i);
+            levelPassed = playLevel(adventure.levels[i], config, i,adventure);
         } while (!levelPassed); // Repeat until the player chooses correctly
     }
     cout << "\nYou have completed the adventure!\n";

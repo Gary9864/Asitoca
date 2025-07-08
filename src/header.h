@@ -33,11 +33,11 @@ struct MinigameConfig {
 // Global variables
 
 extern bool adventuresPlayed[3];
-extern string playerRewards[20];
+extern string playerRewards[20];     // solo Nerysia, Infernum, Thornia
 extern int rewardCount;
-extern string playerName;
-extern string isUmbraReward[5];
+extern string umbraRewards[5];       // solo Umbra
 extern int umbraRewardCount;
+extern string playerName;
 
 
 // Function declarations
